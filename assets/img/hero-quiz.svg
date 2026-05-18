@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#eef2ff"/>
+      <stop offset="100%" stop-color="#c7d2fe"/>
+    </linearGradient>
+  </defs>
+  <rect x="32" y="80" width="736" height="440" rx="56" fill="url(#g1)" opacity="0.18"/>
+  <rect x="64" y="120" width="672" height="360" rx="36" fill="url(#g2)"/>
+  <circle cx="234" cy="240" r="70" fill="#2563eb" opacity="0.8"/>
+  <circle cx="280" cy="205" r="20" fill="#38bdf8"/>
+  <circle cx="322" cy="275" r="16" fill="#818cf8"/>
+  <circle cx="268" cy="330" r="12" fill="#a855f7"/>
+  <rect x="385" y="150" width="286" height="54" rx="24" fill="#0f172a" opacity="0.9"/>
+  <rect x="400" y="220" width="220" height="36" rx="18" fill="#eef2ff"/>
+  <rect x="400" y="280" width="160" height="36" rx="18" fill="#eef2ff"/>
+  <rect x="400" y="340" width="240" height="36" rx="18" fill="#eef2ff"/>
+  <path d="M182 182c14-24 42-40 74-40s60 16 74 40" fill="none" stroke="#1d4ed8" stroke-width="12" stroke-linecap="round"/>
+  <path d="M142 316h160" stroke="#1d4ed8" stroke-width="14" stroke-linecap="round"/>
+  <path d="M530 256h146" stroke="#c7d2fe" stroke-width="12" stroke-linecap="round"/>
+  <path d="M530 316h86" stroke="#c7d2fe" stroke-width="12" stroke-linecap="round"/>
+  <path d="M530 376h176" stroke="#c7d2fe" stroke-width="12" stroke-linecap="round"/>
+  <text x="118" y="418" fill="#0f172a" font-size="42" font-family="Poppins, sans-serif" font-weight="700">Quiz</text>
+  <text x="118" y="462" fill="#475569" font-size="20" font-family="Inter, sans-serif">Pengetahuan umum modern</text>
+</svg>

@@ -1,0 +1,578 @@
+:root {
+  --bg-start: #090d1f;
+  --bg-end: #111b40;
+  --surface: rgba(255, 255, 255, 0.08);
+  --surface-soft: rgba(255, 255, 255, 0.05);
+  --surface-strong: rgba(255, 255, 255, 0.16);
+  --border: rgba(255, 255, 255, 0.14);
+  --text-primary: #f8fafc;
+  --text-muted: #cbd5e1;
+  --accent-start: #7c3aed;
+  --accent-end: #0ea5e9;
+  --shadow: 0 32px 80px rgba(15, 23, 42, 0.35);
+  --radius: 30px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--text-primary);
+  background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.18), transparent 28%),
+              radial-gradient(circle at bottom right, rgba(124, 58, 237, 0.2), transparent 30%),
+              linear-gradient(180deg, var(--bg-start), var(--bg-end));
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(99, 102, 241, 0.16), transparent 35%),
+              radial-gradient(circle at 14% 20%, rgba(56, 189, 248, 0.16), transparent 12%),
+              radial-gradient(circle at 88% 16%, rgba(168, 85, 247, 0.18), transparent 13%);
+  pointer-events: none;
+}
+
+body,
+html {
+  min-height: 100%;
+}
+
+img {
+  max-width: 100%;
+}
+
+nav.navbar {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.hero-banner {
+  position: relative;
+  overflow: hidden;
+  padding: 2rem 0 1rem;
+}
+
+.hero-banner::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: -10%;
+  width: 680px;
+  height: 680px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.16), transparent 60%);
+  transform: translateX(-50%);
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.hero-panel {
+  position: relative;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(24px);
+  box-shadow: var(--shadow);
+}
+
+.hero-panel img {
+  width: 100%;
+  max-width: 520px;
+}
+
+.hero-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.8rem 1rem;
+  border-radius: 999px;
+  background: rgba(59, 130, 246, 0.14);
+  color: #c7d2fe;
+  font-weight: 600;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.section-title h2 {
+  margin: 0;
+  font-size: clamp(2rem, 2.4vw, 2.8rem);
+}
+
+.feature-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-right: 0.75rem;
+  margin-bottom: 0.75rem;
+  padding: 0.85rem 1rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-muted);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform 0.25s ease;
+}
+
+.feature-pill:hover {
+  transform: translateY(-3px);
+}
+
+.navbar-brand,
+.nav-link,
+.navbar-toggler {
+  color: var(--text-primary) !important;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.nav-link {
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: #a5b4fc !important;
+}
+
+.app-shell {
+  min-height: 100vh;
+}
+
+.auth-page,
+.quiz-page,
+.result-page,
+.profile-page,
+.leaderboard-card,
+.admin-list,
+.admin-overview {
+  position: relative;
+}
+
+.auth-page::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.14), transparent 20%),
+              radial-gradient(circle at bottom right, rgba(168, 85, 247, 0.16), transparent 15%);
+  pointer-events: none;
+}
+
+.auth-layout {
+  max-width: 1100px;
+}
+
+.auth-hero {
+  background: rgba(59, 130, 246, 0.12);
+  border-radius: 36px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 32px 80px rgba(15, 23, 42, 0.18);
+}
+
+.auth-hero img {
+  width: 100%;
+  border-radius: 28px;
+}
+
+.auth-card {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 36px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(24px);
+}
+
+.auth-card::after {
+  content: '';
+  position: absolute;
+  right: -60px;
+  top: -60px;
+  width: 180px;
+  height: 180px;
+  background: rgba(56, 189, 248, 0.18);
+  border-radius: 50%;
+  filter: blur(10px);
+}
+
+.auth-card form {
+  position: relative;
+  z-index: 1;
+}
+
+.auth-card .btn-primary {
+  width: auto;
+  min-width: 140px;
+}
+
+.hero-panel img,
+.auth-hero img {
+  transition: transform 0.4s ease;
+}
+
+.hero-panel img:hover,
+.auth-hero img:hover {
+  transform: translateY(-6px) scale(1.01);
+}
+
+.auth-card .form-control,
+.auth-card .form-select {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+}
+
+.auth-card .form-control:focus,
+.auth-card .form-select:focus {
+  border-color: rgba(59, 130, 246, 0.7);
+  box-shadow: 0 0 0 0.25rem rgba(59, 130, 246, 0.16);
+}
+
+.auth-layout .alert {
+  border-radius: 20px;
+}
+
+.swal2-toast-custom {
+  background: rgba(15, 23, 42, 0.95) !important;
+  color: #f8fafc;
+}
+
+.auth-card,
+.quiz-card,
+.result-card,
+.admin-overview,
+.admin-list,
+.profile-page,
+.about-card,
+.leaderboard-card,
+.info-card,
+.profile-summary,
+.chart-card,
+.admin-card,
+.menu-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 32px;
+  box-shadow: var(--shadow);
+}
+
+.auth-card {
+  width: min(540px, 100%);
+  padding: 2.5rem;
+}
+
+.form-label {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.form-control,
+.form-select,
+input[type='search'] {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-primary);
+}
+
+.form-control:focus,
+.form-select:focus,
+input[type='search']:focus {
+  border-color: rgba(59, 130, 246, 0.7);
+  outline: none;
+  box-shadow: 0 0 0 0.15rem rgba(59, 130, 246, 0.15);
+}
+
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:focus {
+  background: linear-gradient(135deg, var(--accent-start), var(--accent-end));
+  border-color: transparent;
+}
+
+.btn-outline-secondary {
+  border-color: rgba(148, 163, 184, 0.35);
+  color: var(--text-primary);
+}
+
+.auth-card h1,
+.quiz-card h3,
+.result-card h2,
+.admin-overview h2,
+.profile-summary h4,
+.about-card h2 {
+  color: #eef2ff;
+}
+
+.text-muted {
+  color: rgba(226, 232, 240, 0.72) !important;
+}
+
+.stat-card {
+  min-height: 130px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+}
+
+.avatar-lg {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border: 4px solid rgba(255, 255, 255, 0.18);
+}
+
+.menu-card {
+  padding: 2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.menu-card:hover {
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 80px rgba(15, 23, 42, 0.25);
+}
+
+.icon-circle {
+  width: 60px;
+  height: 60px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+}
+
+.question-area {
+  min-height: 340px;
+}
+
+.progress {
+  height: 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+}
+
+.progress-bar {
+  background: linear-gradient(90deg, var(--accent-start), var(--accent-end));
+}
+
+.list-group-item {
+  border-radius: 20px;
+  margin-bottom: 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+}
+
+.list-group-item:hover,
+.list-group-item.active {
+  transform: translateY(-2px);
+  background: rgba(59, 130, 246, 0.14);
+  border-color: rgba(59, 130, 246, 0.35);
+}
+
+.list-group-item.option-correct {
+  background: rgba(16, 185, 129, 0.12) !important;
+  border-color: rgba(16, 185, 129, 0.35) !important;
+}
+
+.list-group-item.option-wrong {
+  background: rgba(239, 68, 68, 0.12) !important;
+  border-color: rgba(239, 68, 68, 0.35) !important;
+}
+
+.quiz-footer {
+  align-items: center;
+}
+
+.quiz-card {
+  padding: 2rem;
+}
+
+.spider-page {
+  position: relative;
+}
+
+.spider-page::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 20%, rgba(255, 59, 59, 0.18), transparent 28%),
+              radial-gradient(circle at 85% 15%, rgba(255, 255, 255, 0.08), transparent 22%),
+              radial-gradient(circle at 50% 90%, rgba(255, 59, 59, 0.1), transparent 24%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.spider-page .quiz-card {
+  position: relative;
+  z-index: 1;
+  background: rgba(16, 10, 18, 0.96);
+  border: 1px solid rgba(255, 59, 59, 0.18);
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.35);
+}
+
+.spider-page .hero-label {
+  background: rgba(220, 38, 38, 0.18);
+  color: #fee2e2;
+}
+
+.spider-page .feature-pill {
+  background: rgba(239, 68, 68, 0.14);
+  color: #fee2e2;
+}
+
+.spider-page .quiz-header h3,
+.spider-page .quiz-header p,
+.spider-page .quiz-footer .text-muted,
+.spider-page .question-title h4 {
+  color: #f8fafc;
+}
+
+.spider-page .badge.bg-primary,
+.spider-page .badge.bg-secondary {
+  background: #dc2626 !important;
+  color: #fff !important;
+}
+
+.spider-page .progress-bar {
+  background: linear-gradient(90deg, #ef4444, #b91c1c);
+}
+
+.spider-page .btn-outline-secondary {
+  border-color: rgba(255, 59, 59, 0.35);
+  color: #f8fafc;
+}
+
+.spider-page .btn-outline-secondary:hover {
+  background: rgba(220, 38, 38, 0.15);
+  border-color: rgba(255, 59, 59, 0.65);
+}
+
+.spider-page .list-group-item.option-correct {
+  background: rgba(34, 197, 94, 0.12) !important;
+  border-color: rgba(34, 197, 94, 0.35) !important;
+}
+
+.spider-page .list-group-item.option-wrong {
+  background: rgba(239, 68, 68, 0.18) !important;
+  border-color: rgba(239, 68, 68, 0.35) !important;
+}
+
+.profile-summary,
+.chart-card,
+.about-card,
+.admin-card {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.profile-summary {
+  min-height: 100%;
+}
+
+.bg-gradient {
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.92), rgba(14, 165, 233, 0.92));
+}
+
+.leaderboard-card table {
+  color: var(--text-primary);
+  border-collapse: separate;
+  border-spacing: 0 0.6rem;
+}
+
+.leaderboard-card table th,
+.leaderboard-card table td {
+  border: none;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1rem 0.8rem;
+}
+
+.leaderboard-card table thead th {
+  color: #c7d2fe;
+  font-weight: 700;
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.minimal-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+}
+
+.minimal-title {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.spider-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.spider-card::before,
+.spider-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.spider-card::before {
+  background-image: radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.06) 0%, transparent 28%),
+                    linear-gradient(0deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 100% 100%, 72px 72px, 72px 72px;
+  opacity: 0.45;
+}
+
+.spider-card::after {
+  background-image: radial-gradient(circle at 50% 50%, transparent 0%, rgba(255, 255, 255, 0.07) 1px, transparent 38%),
+                    radial-gradient(circle at 50% 50%, transparent 0%, rgba(255, 255, 255, 0.07) 1px, transparent 38%),
+                    radial-gradient(circle at 50% 50%, transparent 0%, rgba(255, 255, 255, 0.07) 1px, transparent 38%);
+  background-size: 140px 140px, 260px 260px, 380px 380px;
+  background-position: center;
+  opacity: 0.14;
+}
+
+.spider-card h2 i {
+  color: #c4b5fd;
+}
+
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+@media (max-width: 992px) {
+  .auth-card,
+  .quiz-card,
+  .profile-card,
+  .about-card,
+  .admin-list,
+  .admin-overview {
+    border-radius: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .quiz-header,
+  .profile-summary,
+  .row.g-4 > .col-md-4,
+  .navbar-nav {
+    flex-direction: column !important;
+  }
+  .navbar-collapse {
+    background: rgba(15, 23, 42, 0.85);
+    padding: 1rem;
+    border-radius: 20px;
+  }
+}
