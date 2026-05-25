@@ -19,24 +19,24 @@ $leaders = $stmt->fetchAll();
     </div>
 
     <div class="table-responsive">
-      <table class="table table-hover align-middle">
+      <table class="table table-hover align-middle text-white" style="color: #f8fafc !important;">
         <thead class="table-light">
           <tr>
-            <th>#</th>
-            <th>Nama</th>
-            <th>Username</th>
-            <th>Skor</th>
-            <th>Tanggal</th>
+            <th style="color: #f8fafc !important;">#</th>
+            <th style="color: #f8fafc !important;">Nama</th>
+            <th style="color: #f8fafc !important;">Username</th>
+            <th style="color: #f8fafc !important;">Skor</th>
+            <th style="color: #f8fafc !important;">Tanggal</th>
           </tr>
         </thead>
-        <tbody id="leaderboardBody">
+        <tbody id="leaderboardBody" style="color: #f8fafc !important;">
           <?php foreach ($leaders as $index => $leader): ?>
             <tr>
-              <td><?php echo $index + 1; ?></td>
-              <td><?php echo htmlspecialchars($leader['nama']); ?></td>
-              <td><?php echo htmlspecialchars($leader['username']); ?></td>
-              <td><?php echo htmlspecialchars($leader['score']); ?></td>
-              <td><?php echo date('d M Y H:i', strtotime($leader['created_at'])); ?></td>
+              <td style="color: #f8fafc !important;"><?php echo $index + 1; ?></td>
+              <td style="color: #f8fafc !important;"><?php echo htmlspecialchars($leader['nama']); ?></td>
+              <td style="color: #f8fafc !important;"><?php echo htmlspecialchars($leader['username']); ?></td>
+              <td style="color: #f8fafc !important;"><?php echo htmlspecialchars($leader['score']); ?></td>
+              <td style="color: #f8fafc !important;"><?php echo date('d M Y H:i', strtotime($leader['created_at'])); ?></td>
             </tr>
           <?php endforeach; ?>
         </tbody>

@@ -1,6 +1,11 @@
 <?php
 require_once __DIR__ . '/../config/database.php';
 
+try {
+    $pdo->exec("ALTER TABLE questions ADD COLUMN IF NOT EXISTS domain VARCHAR(64) NOT NULL DEFAULT 'Sains dan Lingkungan'");
+} catch (Exception $e) {
+}
+
 $questionCount = 1000;
 if (PHP_SAPI === 'cli') {
     global $argv;
@@ -63,6 +68,11 @@ function buildWrongAnswers($correct, string $type): array {
     return ['Pilihan 1', 'Pilihan 2', 'Pilihan 3'];
 }
 
+function optionLetterForIndex(int $index): string {
+    $letters = ['A', 'B', 'C', 'D'];
+    return $letters[$index] ?? 'A';
+}
+
 $questions = [];
 for ($i = 1; $i <= $questionCount; $i++) {
     if ($i <= 400) {
@@ -71,13 +81,15 @@ for ($i = 1; $i <= $questionCount; $i++) {
         $correctAnswer = (string)($a + $b);
         $wrong = buildWrongAnswers([$correctAnswer], 'number');
         $options = shuffleOptions(array_merge([$correctAnswer], $wrong));
+        $correctIndex = array_search($correctAnswer, $options, true);
         $questions[] = [
             'question' => "Berapa hasil dari $a + $b?",
             'option_a' => $options['A'],
             'option_b' => $options['B'],
             'option_c' => $options['C'],
             'option_d' => $options['D'],
-            'correct' => array_search($correctAnswer, $options, true),
+            'correct' => optionLetterForIndex((int) $correctIndex),
+            'domain' => 'Teknologi dan Digitalisasi',
         ];
         continue;
     }
@@ -87,13 +99,15 @@ for ($i = 1; $i <= $questionCount; $i++) {
         $correctAnswer = $entry['city'];
         $wrong = buildWrongAnswers($correctAnswer, 'capital');
         $options = shuffleOptions(array_merge([$correctAnswer], $wrong));
+        $correctIndex = array_search($correctAnswer, $options, true);
         $questions[] = [
             'question' => "Apa ibukota dari {$entry['country']}?",
             'option_a' => $options['A'],
             'option_b' => $options['B'],
             'option_c' => $options['C'],
             'option_d' => $options['D'],
-            'correct' => array_search($correctAnswer, $options, true),
+            'correct' => optionLetterForIndex((int) $correctIndex),
+            'domain' => 'Geografi dan Sejarah Global',
         ];
         continue;
     }
@@ -103,13 +117,15 @@ for ($i = 1; $i <= $questionCount; $i++) {
         $correctAnswer = $entry['opposite'];
         $wrong = buildWrongAnswers($correctAnswer, 'antonym');
         $options = shuffleOptions(array_merge([$correctAnswer], $wrong));
+        $correctIndex = array_search($correctAnswer, $options, true);
         $questions[] = [
             'question' => "Apa lawan kata dari '{$entry['word']}'?",
             'option_a' => $options['A'],
             'option_b' => $options['B'],
             'option_c' => $options['C'],
             'option_d' => $options['D'],
-            'correct' => array_search($correctAnswer, $options, true),
+            'correct' => optionLetterForIndex((int) $correctIndex),
+            'domain' => 'Seni, Budaya, dan Humaniora',
         ];
         continue;
     }
@@ -120,19 +136,21 @@ for ($i = 1; $i <= $questionCount; $i++) {
     $wrong = array_filter($wrong, fn($item) => $item !== $correctAnswer);
     shuffle($wrong);
     $options = shuffleOptions(array_merge([$correctAnswer], array_slice($wrong, 0, 3)));
+    $correctIndex = array_search($correctAnswer, $options, true);
     $questions[] = [
         'question' => "Bulan apa yang biasanya memiliki 30 hari selain April?",
         'option_a' => $options['A'],
         'option_b' => $options['B'],
         'option_c' => $options['C'],
         'option_d' => $options['D'],
-        'correct' => array_search($correctAnswer, $options, true),
+        'correct' => optionLetterForIndex((int) $correctIndex),
+        'domain' => 'Geografi dan Sejarah Global',
     ];
 }
 
 try {
     $pdo->beginTransaction();
-    $stmt = $pdo->prepare('INSERT INTO questions (question, option_a, option_b, option_c, option_d, correct_answer) VALUES (:question, :a, :b, :c, :d, :correct)');
+    $stmt = $pdo->prepare('INSERT INTO questions (question, option_a, option_b, option_c, option_d, correct_answer, domain) VALUES (:question, :a, :b, :c, :d, :correct, :domain)');
     foreach ($questions as $item) {
         $stmt->execute([
             ':question' => $item['question'],
@@ -141,6 +159,7 @@ try {
             ':c' => $item['option_c'],
             ':d' => $item['option_d'],
             ':correct' => $item['correct'],
+            ':domain' => $item['domain'],
         ]);
     }
     $pdo->commit();

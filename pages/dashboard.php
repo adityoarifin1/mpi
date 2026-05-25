@@ -11,12 +11,18 @@ $best_score = $data['best_score'] ?? 0;
 ?>
 <div class="container py-5">
   <div id="toastData" data-message="Selamat datang kembali, <?php echo htmlspecialchars($user['nama']); ?>!" hidden></div>
+  <?php
+    $heroImage = htmlspecialchars($user['foto']);
+    if ($heroImage && strpos($heroImage, 'http') !== 0 && strpos($heroImage, '/') !== 0) {
+      $heroImage = $base . '/' . $heroImage;
+    }
+  ?>
   <div class="hero-banner row align-items-center gx-5 mb-5">
     <div class="col-lg-7">
       <div class="hero-panel p-5">
         <span class="hero-label"><i class="fa-solid fa-brain"></i> Kuis Pengetahuan Umum</span>
-        <h1 class="display-5 mt-4">Latih Otakmu dengan Tantangan Umum</h1>
-        <p class="text-muted mt-3">Jawab 10 soal dari berbagai topik umum, kumpulkan skor, dan menangkan leaderboard dengan tampilan modern yang penuh energi.</p>
+        <h1 class="display-5 mt-4">Tingkatkan Kemampuan dengan Kuis Profesional</h1>
+        <p class="text-muted mt-3">Kerjakan 10 soal pilihan ganda dengan pengalaman tampilan profesional, skor real-time, dan leaderboard kompetitif.</p>
         <div class="mt-4 d-flex flex-wrap gap-2">
           <span class="feature-pill"><i class="fa-solid fa-stopwatch"></i> 7 menit</span>
           <span class="feature-pill"><i class="fa-solid fa-star"></i> +10 poin benar</span>
@@ -26,8 +32,10 @@ $best_score = $data['best_score'] ?? 0;
       </div>
     </div>
     <div class="col-lg-5 text-center">
-      <div class="hero-panel p-4">
-        <img src="<?php echo BASE_URL; ?>/assets/img/hero-quiz.svg" alt="Quiz Hero" class="img-fluid animate__animated animate__zoomIn">
+      <div class="hero-panel p-4 py-5 position-relative">
+        <div class="hero-image-frame mx-auto position-relative">
+          <img src="<?php echo $heroImage; ?>" class="img-fluid rounded-4 animate__animated animate__zoomIn" alt="User Hero Image">
+        </div>
       </div>
     </div>
   </div>
@@ -36,10 +44,9 @@ $best_score = $data['best_score'] ?? 0;
       <div>
         <span class="badge bg-primary rounded-pill">Dashboard</span>
         <h2 class="mt-3">Halo, <?php echo htmlspecialchars($user['nama']); ?>!</h2>
-        <p class="text-muted">Selamat datang di Kuis Pengetahuan Umum — jawab dan kalahkan skor terbaikmu!</p>
+        <p class="text-muted">Selamat datang di platform kuis profesional — uji kemampuanmu dan raih skor terbaik.</p>
       </div>
       <div class="profile-card text-end">
-        <img src="<?php echo htmlspecialchars($user['foto']); ?>" alt="Profile" class="avatar rounded-circle mb-2">
         <p class="mb-0 fw-semibold"><?php echo htmlspecialchars($user['username']); ?></p>
         <small class="text-muted">Role: <?php echo htmlspecialchars($user['role']); ?></small>
       </div>
@@ -68,21 +75,21 @@ $best_score = $data['best_score'] ?? 0;
       <div class="row g-4">
         <div class="col-md-4">
           <a href="quiz.php" class="menu-card p-4 rounded-4 text-decoration-none d-block shadow-sm">
-            <div class="icon-circle bg-primary text-white mb-3"><i class="fa-solid fa-play"></i></div>
+            <div class="icon-circle bg-gradient text-white mb-3"><i class="fa-solid fa-rocket"></i></div>
             <h5>Mulai Kuis</h5>
             <p class="text-muted">Kerjakan 10 soal acak dalam 7 menit.</p>
           </a>
         </div>
         <div class="col-md-4">
           <a href="leaderboard.php" class="menu-card p-4 rounded-4 text-decoration-none d-block shadow-sm">
-            <div class="icon-circle bg-success text-white mb-3"><i class="fa-solid fa-trophy"></i></div>
+            <div class="icon-circle bg-danger text-white mb-3"><i class="fa-solid fa-award"></i></div>
             <h5>Leaderboard</h5>
             <p class="text-muted">Lihat ranking top 10 pemain terbaik.</p>
           </a>
         </div>
         <div class="col-md-4">
           <a href="profile.php" class="menu-card p-4 rounded-4 text-decoration-none d-block shadow-sm">
-            <div class="icon-circle bg-warning text-white mb-3"><i class="fa-solid fa-user"></i></div>
+            <div class="icon-circle bg-info text-white mb-3"><i class="fa-solid fa-user-gear"></i></div>
             <h5>Profil</h5>
             <p class="text-muted">Kelola profil dan lihat statistik nilai.</p>
           </a>

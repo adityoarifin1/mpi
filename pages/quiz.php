@@ -30,7 +30,10 @@ $user = $_SESSION['user'];
       <div id="questionArea" class="question-area">
         <div class="question-title mb-3">
           <span class="badge bg-primary">Soal <span id="currentIndex">1</span>/10</span>
-          <h4 id="questionText" class="mt-3">Menunggu soal...</h4>
+          <div class="mt-3">
+            <span id="questionDomain" class="badge bg-info text-dark">Memuat domain...</span>
+          </div>
+          <h4 id="questionText" class="mt-3">Memuat soal...</h4>
         </div>
         <div id="optionButtons" class="list-group"></div>
       </div>
@@ -46,6 +49,6 @@ $user = $_SESSION['user'];
   </div>
 </div>
 <?php
-$pageScript = BASE_URL . '/assets/js/quiz.js';
+$pageScript = BASE_URL . '/assets/js/quiz.js?v=' . filemtime(__DIR__ . '/../assets/js/quiz.js');
 require_once __DIR__ . '/../includes/footer.php';
 ?>

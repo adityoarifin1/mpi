@@ -12,6 +12,7 @@ const quizState = {
 
 const timerElement = document.getElementById('timer');
 const questionText = document.getElementById('questionText');
+const questionDomain = document.getElementById('questionDomain');
 const optionButtons = document.getElementById('optionButtons');
 const scoreValue = document.getElementById('scoreValue');
 const currentIndex = document.getElementById('currentIndex');
@@ -19,6 +20,10 @@ const progressBar = document.getElementById('quizProgress');
 const restartButton = document.getElementById('restartQuiz');
 
 function startQuiz() {
+  questionText.textContent = 'Memuat soal...';
+  questionDomain.textContent = 'Memuat domain...';
+  scoreValue.textContent = '0';
+
   fetch('../process/submit_answer.php', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -28,6 +33,8 @@ function startQuiz() {
     .then(({ status, body }) => {
       if (status !== 200 || body.error) {
         const message = body.error || 'Gagal memulai kuis. Silakan coba lagi.';
+        questionText.textContent = 'Gagal memuat soal.';
+        questionDomain.textContent = 'Belum diklasifikasikan';
         showToast(message, 'error');
         return;
       }
@@ -38,9 +45,12 @@ function startQuiz() {
       quizState.timer = 420;
       quizState.total = body.question.total || 10;
       renderQuestion(body.question);
+      window.audioSystem?.startQuizBgm();
       startTimer();
     })
     .catch(err => {
+      questionText.textContent = 'Gagal memuat soal.';
+      questionDomain.textContent = 'Belum diklasifikasikan';
       showToast('Tidak dapat terhubung ke server. Coba lagi.', 'error');
       console.error('startQuiz error:', err);
     });
@@ -51,8 +61,16 @@ function startTimer() {
   quizState.interval = setInterval(() => {
     quizState.timer -= 1;
     updateTimer();
+
+    if (quizState.timer <= 60) {
+      window.audioSystem?.startTicking();
+    } else {
+      window.audioSystem?.stopTicking();
+    }
+
     if (quizState.timer <= 0) {
       clearInterval(quizState.interval);
+      window.audioSystem?.stopTicking();
       saveResult();
     }
   }, 1000);
@@ -69,6 +87,7 @@ function renderQuestion(question) {
   quizState.index = question.currentIndex - 1;
   currentIndex.textContent = question.currentIndex;
   questionText.textContent = question.question;
+  questionDomain.textContent = question.domain || 'Belum diklasifikasikan';
   scoreValue.textContent = quizState.score;
   progressBar.style.width = `${(question.currentIndex - 1) / question.total * 100}%`;
 
@@ -109,19 +128,20 @@ function submitAnswer(answer) {
       if (body.correct) {
         quizState.score = body.score;
         quizState.correct += 1;
-        playTone(440, 'success');
+        playTone('success');
         if (typeof confetti !== 'undefined') {
           confetti({ particleCount: 18, spread: 60, origin: { y: 0.6 } });
         }
         showToast('Benar!', 'success');
       } else {
         quizState.wrong += 1;
-        playTone(150, 'error');
+        playTone('error');
         showToast('Salah!', 'error');
       }
       scoreValue.textContent = body.score || quizState.score;
       if (body.done) {
         clearInterval(quizState.interval);
+        window.audioSystem?.stopTicking();
         if (typeof confetti !== 'undefined') {
           confetti({ particleCount: 120, spread: 90, origin: { y: 0.4 } });
         }
@@ -156,8 +176,6 @@ function submitAnswer(answer) {
 }
 
 function saveResult() {
-  const completionMinutes = 7 - Math.floor(quizState.timer / 60);
-  const completionSeconds = String(60 - (quizState.timer % 60)).padStart(2, '0');
   const completionTime = `${7 - Math.floor(quizState.timer / 60)}:${String(quizState.timer % 60).padStart(2, '0')}`;
   fetch('../process/save_score.php', {
     method: 'POST',
@@ -183,21 +201,12 @@ function saveResult() {
     });
 }
 
-function playTone(frequency, type) {
-  try {
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    const oscillator = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    oscillator.frequency.value = frequency;
-    oscillator.type = type === 'success' ? 'triangle' : 'sine';
-    gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-    oscillator.connect(gain);
-    gain.connect(audioCtx.destination);
-    oscillator.start();
-    oscillator.stop(audioCtx.currentTime + 0.12);
-  } catch (error) {
-    console.warn('Audio tidak tersedia', error);
+function playTone(type) {
+  if (type === 'success') {
+    window.audioSystem?.playCorrect();
+    return;
   }
+  window.audioSystem?.playWrong();
 }
 
 if (restartButton) {

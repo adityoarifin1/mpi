@@ -34,7 +34,9 @@ try {
     if ($remember) {
         setcookie('remember_user', $user['username'], time() + 60 * 60 * 24 * 30, '/');
     }
-    header('Location: ../pages/dashboard.php');
+
+    $redirect = ($user['role'] ?? '') === 'admin' ? '../admin/dashboard.php' : '../pages/dashboard.php';
+    header('Location: ' . $redirect);
     exit;
 } catch (PDOException $e) {
     $_SESSION['error'] = 'Terjadi kesalahan database: ' . htmlspecialchars($e->getMessage());

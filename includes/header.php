@@ -28,13 +28,21 @@ $base = defined('BASE_URL') ? BASE_URL : '';
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="mainNav">
-          <ul class="navbar-nav ms-auto gap-2">
+          <ul class="navbar-nav ms-auto gap-2 align-items-lg-center">
             <?php if (is_logged_in()): ?>
-              <li class="nav-item"><a class="nav-link" href="<?php echo $base; ?>/pages/dashboard.php">Dashboard</a></li>
-              <li class="nav-item"><a class="nav-link" href="<?php echo $base; ?>/pages/quiz.php">Mulai Kuis</a></li>
-              <li class="nav-item"><a class="nav-link" href="<?php echo $base; ?>/pages/leaderboard.php">Leaderboard</a></li>
-              <li class="nav-item"><a class="nav-link" href="<?php echo $base; ?>/pages/profile.php">Profil</a></li>
-              <li class="nav-item"><a class="nav-link" href="<?php echo $base; ?>/pages/about.php">Tentang</a></li>
+              <?php $role = $_SESSION['user']['role'] ?? 'user'; ?>
+              <?php if ($role === 'admin'): ?>
+                <li class="nav-item"><a class="nav-link" href="<?php echo $base; ?>/admin/dashboard.php">Dashboard Admin</a></li>
+                <li class="nav-item"><a class="nav-link" href="<?php echo $base; ?>/admin/users.php">Kelola User</a></li>
+                <li class="nav-item"><a class="nav-link" href="<?php echo $base; ?>/admin/questions.php">Kelola Soal</a></li>
+                <li class="nav-item"><a class="nav-link" href="<?php echo $base; ?>/admin/scores.php">Lihat Skor</a></li>
+              <?php else: ?>
+                <li class="nav-item"><a class="nav-link" href="<?php echo $base; ?>/pages/dashboard.php">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="<?php echo $base; ?>/pages/quiz.php">Mulai Kuis</a></li>
+                <li class="nav-item"><a class="nav-link" href="<?php echo $base; ?>/pages/leaderboard.php">Leaderboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="<?php echo $base; ?>/pages/profile.php">Profil</a></li>
+                <li class="nav-item"><a class="nav-link" href="<?php echo $base; ?>/pages/about.php">Tentang</a></li>
+              <?php endif; ?>
               <li class="nav-item"><a class="btn btn-sm btn-outline-secondary" href="<?php echo $base; ?>/logout.php">Logout</a></li>
             <?php else: ?>
               <li class="nav-item"><a class="nav-link" href="<?php echo $base; ?>/login.php">Login</a></li>

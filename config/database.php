@@ -1,10 +1,19 @@
 <?php
 // Database connection configuration
-$host = '127.0.0.1';
-$db   = 'quiz_app';
-$user = 'root';
-$pass = '';
-$charset = 'utf8mb4';
+function env(string $key, string $default): string {
+    $value = getenv($key);
+    if ($value === false || trim((string) $value) === '') {
+        return $default;
+    }
+
+    return $value;
+}
+
+$host = env('DB_HOST', '127.0.0.1');
+$db   = env('DB_NAME', 'quiz_app');
+$user = env('DB_USER', 'root');
+$pass = env('DB_PASS', '');
+$charset = env('DB_CHARSET', 'utf8mb4');
 
 $rootUrl = '';
 if (isset($_SERVER['HTTP_HOST']) && strpos($_SERVER['HTTP_HOST'], '8000') !== false) {

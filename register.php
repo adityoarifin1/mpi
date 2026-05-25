@@ -6,7 +6,7 @@ $flash = flash_message('error');
   <div class="auth-layout row gx-4 gy-4 align-items-center w-100">
     <div class="col-lg-6 d-none d-lg-block">
       <div class="auth-hero p-4 animate__animated animate__fadeInLeft">
-        <img src="<?php echo BASE_URL; ?>/assets/img/auth-hero.svg" alt="Ilustrasi Quiz" class="img-fluid">
+        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80" alt="Ilustrasi belajar kuis" class="img-fluid rounded-4 shadow-lg">
       </div>
     </div>
     <div class="col-lg-6">

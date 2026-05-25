@@ -28,25 +28,25 @@ if ($result['score'] >= 90) {
     </div>
     <div class="row g-4 mb-4">
       <div class="col-md-3">
-        <div class="stat-card p-4 rounded-4 bg-light text-center">
+        <div class="stat-card p-4 rounded-4 text-center">
           <span class="text-muted">Total Skor</span>
           <h3 class="mt-2"><?php echo htmlspecialchars($result['score']); ?></h3>
         </div>
       </div>
       <div class="col-md-3">
-        <div class="stat-card p-4 rounded-4 bg-light text-center">
+        <div class="stat-card p-4 rounded-4 text-center">
           <span class="text-muted">Jawaban Benar</span>
           <h3 class="mt-2"><?php echo htmlspecialchars($result['correct_answers']); ?></h3>
         </div>
       </div>
       <div class="col-md-3">
-        <div class="stat-card p-4 rounded-4 bg-light text-center">
+        <div class="stat-card p-4 rounded-4 text-center">
           <span class="text-muted">Jawaban Salah</span>
           <h3 class="mt-2"><?php echo htmlspecialchars($result['wrong_answers']); ?></h3>
         </div>
       </div>
       <div class="col-md-3">
-        <div class="stat-card p-4 rounded-4 bg-light text-center">
+        <div class="stat-card p-4 rounded-4 text-center">
           <span class="text-muted">Waktu</span>
           <h3 class="mt-2"><?php echo htmlspecialchars($result['completion_time']); ?></h3>
         </div>
